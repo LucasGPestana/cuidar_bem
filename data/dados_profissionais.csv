@@ -1,0 +1,14 @@
+profissional,turno,dia,tempo_medio_atendimento,tempo_expediente
+1,M,1,7,5
+1,T,3,7,5
+2,M,1,5,2
+2,T,1,5,3
+2,N,5,5,5
+3,M,4,9,4
+3,M,3,9,6
+4,M,2,7,4
+4,T,4,7,4
+4,T,5,7,2
+5,N,1,12,3
+5,N,2,12,3
+5,N,6,12,4
