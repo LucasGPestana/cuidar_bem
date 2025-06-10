@@ -170,7 +170,7 @@ class ProfProblemSolver:
         
         return problem
     
-    def findOptimalSolution(problem: pp.LpProblem) -> Tuple[List[pp.LpVariable], float]:
+    def findOptimalSolution(problem: pp.LpProblem) -> Tuple[List[pp.LpVariable], float, List[float]]:
 
         """Busca a solução ótima do problema passado como argumento
 
@@ -185,6 +185,8 @@ class ProfProblemSolver:
             Lista com as variáveis contendo seus respectivos valores da solução ótima
         float
             Solução ótima da função objetivo
+        List[float]
+            Valores das variáveis de folga do problema
 
         """
 
@@ -192,4 +194,6 @@ class ProfProblemSolver:
 
         cleanShell()
 
-        return problem.variables(), problem.objective.value()
+        slack_variables = [constraint.value() for constraint in problem.constraints.values()]
+
+        return problem.variables(), problem.objective.value(), slack_variables
