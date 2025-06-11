@@ -130,7 +130,9 @@ class ProfProblemSolver:
                     )
                     )
 
-        problem += pp.lpSum(context_variables) <= demand
+            for variable in context_variables:
+
+                problem += pp.lpSum(variable) <= demand
 
         # Restrição 2 - Demanda para cada turno
         # x_p_d_t <= demanda turno
@@ -147,7 +149,9 @@ class ProfProblemSolver:
                     )
                     )
 
-            problem += pp.lpSum(context_variables) <= demand
+            for variable in context_variables:
+
+                problem += pp.lpSum(variable) <= demand
 
         # Restrição 3 - Tempo de trabalho dos profissionais
         # tempo_medio_servico (min) * x_p_d_t <= tempo_expediente (h) * 60
@@ -170,7 +174,7 @@ class ProfProblemSolver:
         
         return problem
     
-    def findOptimalSolution(problem: pp.LpProblem) -> Tuple[List[pp.LpVariable], float, List[float]]:
+    def findOptimalSolution(problem: pp.LpProblem) -> Tuple[List[pp.LpVariable], float]:
 
         """Busca a solução ótima do problema passado como argumento
 
@@ -185,8 +189,6 @@ class ProfProblemSolver:
             Lista com as variáveis contendo seus respectivos valores da solução ótima
         float
             Solução ótima da função objetivo
-        List[float]
-            Valores das variáveis de folga do problema
 
         """
 
@@ -194,6 +196,4 @@ class ProfProblemSolver:
 
         cleanShell()
 
-        slack_variables = [constraint.value() for constraint in problem.constraints.values()]
-
-        return problem.variables(), problem.objective.value(), slack_variables
+        return problem.variables(), problem.objective.value()
