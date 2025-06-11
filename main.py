@@ -4,6 +4,6 @@ from src.utils import showResults
 
 problem = ProfProblemSolver.buildModel()
 
-variables, optimal, sv_values = ProfProblemSolver.findOptimalSolution(problem)
+variables, optimal = ProfProblemSolver.findOptimalSolution(problem)
 
-print(showResults(variables, optimal, sv_values))
+print(showResults(variables, optimal))
