@@ -12,9 +12,9 @@ def cleanShell() -> None:
 
     os.system("cls" if os.sys.platform.startswith("win") else "clear")
 
-def showResults(variables: List[pp.LpVariable], optimal: float, slack_variables_values: List[float]) -> str:
+def showResults(variables: List[pp.LpVariable], optimal: float) -> str:
 
-    """Mostra o nome das variáveis e seus respectivos valores, a solução ótima e as variáveis de folga
+    """Mostra o nome das variáveis e seus respectivos valores e a solução ótima
 
     Parameters
     ----------
@@ -22,8 +22,6 @@ def showResults(variables: List[pp.LpVariable], optimal: float, slack_variables_
         Variáveis contendo informações do nome e do valor
     optimal : float
         Solução ótima da função objetivo 
-    slack_variables_values : List[float]
-        Valores das variáveis de folga
     
     Returns
     -------
@@ -41,12 +39,6 @@ def showResults(variables: List[pp.LpVariable], optimal: float, slack_variables_
         content += f"{variable.getName():<10} | {variable.value():7.0f}\n"
     
     content += f"Solução Ótima: {optimal:.0f}\n"
-
-    content += "Variáveis de Folga\n"
-    
-    for i, value in enumerate(slack_variables_values, start=1):
-
-        content += f"S{i}: {value}\n"
     
     return content
 
